@@ -1,6 +1,8 @@
 package com.example.simpleboard.post.db;
 
+import com.example.simpleboard.board.db.BoardEntity;
 import com.example.simpleboard.reply.db.ReplyEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +22,10 @@ public class PostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long boardId;
+    @ManyToOne
+    @JsonIgnore // 상위에서 호출해야지만 생성 => Json 형식 리턴 안함
+    @ToString.Exclude // 무한 호출 문제 해결
+    private BoardEntity board;
 
     private String userName;
 
@@ -37,6 +42,10 @@ public class PostEntity {
 
     private LocalDateTime postedAt;
 
-    @Transient // DB 컬럼이 아니라고 선언
+//    @Transient // DB 컬럼이 아니라고 선언
+    @OneToMany(
+            mappedBy = "post"
+    )
+    @Builder.Default
     private List<ReplyEntity> replyList = List.of(); // 빈 리스트
 }
