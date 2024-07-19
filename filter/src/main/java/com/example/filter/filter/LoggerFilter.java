@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Component
+//@Component
 public class LoggerFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
