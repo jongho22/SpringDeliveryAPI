@@ -22,6 +22,12 @@ public class PostApiController {
 
     private final PostService postService;
 
+    // CREATE
+    // READ
+    // UPDATE
+    // DELETE
+    // LIST
+
     @PostMapping("")
     public PostEntity create(
             @Valid
