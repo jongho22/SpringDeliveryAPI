@@ -13,7 +13,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public void login(
+    public String login(
             LoginRequest loginRequest,
             HttpServletResponse httpServletResponse
     ) {
@@ -27,20 +27,26 @@ public class UserService {
 
             if(userDto.getPassword().equals(pw)) {
                 // 쿠키 해당 정보를 저장
-                var cookie = new Cookie("authorization", userDto.getId());
+                /*
+                    var cookie = new Cookie("authorization", userDto.getId());
                 cookie.setDomain("localhost");
                 cookie.setPath("/");
                 cookie.setHttpOnly(true); // 보안 처리 => 브라우저에서 읽을 수 없음
-//                cookie.setSecure(true); // https에서만 작동하도록 설정
+                cookie.setSecure(true); // https에서만 작동하도록 설정
                 cookie.setMaxAge(-1); // session과 동일 탭 닫히기 전까지  (접속시간)
 
                 httpServletResponse.addCookie(cookie);
+                 */
+
+                // 헤더 사용
+                System.out.println("로그인 성공");
+                return userDto.getId();
+
             } else {
                 throw new RuntimeException("비밀번호가 틀렸습니다.");
             }
         } else{
             throw new RuntimeException("유저가 없습니다.");
         }
-
     }
 }

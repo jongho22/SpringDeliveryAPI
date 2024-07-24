@@ -93,8 +93,13 @@
                 url: '/api/account/login',
                 method: 'POST',
                 contentType: 'application/json', // JSON 형식으로 데이터 전송
-                dataType: 'json', // 받아오는 데이터 타입을 JSON으로 설정
+              /**
+               * dataType: 'json', // 받아오는 데이터 타입을 JSON으로 설정
+               */
                 data: JSON.stringify({ id: username, password: password }), // 데이터를 JSON 문자열로 변환하여 전송
+                success : function (response){
+                  console.log(response);
+                },
                 complete: function (xhr, status) {
                     if (xhr.status == 200) {
                         alert("로그인 성공")
