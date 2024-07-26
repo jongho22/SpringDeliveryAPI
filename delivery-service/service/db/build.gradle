@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.3.2'
-	id 'io.spring.dependency-management' version '1.1.6'
+	id 'org.springframework.boot'
+	id 'io.spring.dependency-management'
 }
 
 group = 'com.delivery'
@@ -13,16 +13,33 @@ java {
 	}
 }
 
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// DB
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.mysql:mysql-connector-j'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+bootJar {
+	enabled = false
+}
+
+jar {
+	enabled = true
 }
