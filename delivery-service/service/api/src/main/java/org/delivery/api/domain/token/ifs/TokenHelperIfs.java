@@ -1,4 +1,6 @@
-package org.delivery.api.domain.token.helper;
+package org.delivery.api.domain.token.ifs;
+
+import org.delivery.api.domain.token.model.TokenDto;
 
 import java.util.Map;
 
